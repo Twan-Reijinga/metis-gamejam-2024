@@ -1,25 +1,25 @@
 let controlHandler = new ControlHandler();
-let delta;
 let imgs = [];
+
+let tiles;
+let player;
+let xShift = xResulution / 2;
+let yShift = yResulution / 2;
+let delta;
+let tileSize = 64;
 var xResulution = 6 * 170;
 var yResulution = (xResulution / 6) * 5;
-var player = new Player(0, 0);
-var xShift = xResulution / 2;
-var yShift = yResulution / 2;
-let tileSize = 32;
 
 function preload() {
     imgs.push(loadImage("/Assets/Textures/placeholder.png"));
 }
 
-var xResulution = 6 * 170;
-var yResulution = (xResulution / 6) * 5;
-var player = new Player(0, 0);
-var xShift = xResulution / 2;
-var yShift = yResulution / 2;
-var textbox = new TextBoxHandler(xResulution, yResulution, controlHandler);
+let controls = new Controls();
+let textbox = new TextBoxHandler(xResulution, yResulution, controlHandler);
 
 function setup() {
+    tiles = new Tiles(5, 6, tileSize, imgs);
+    player = new Player(0, 0);
     createCanvas(xResulution, yResulution);
 }
 
@@ -30,11 +30,9 @@ function draw() {
     textbox.Update();
 
     // Drawing
+    noSmooth();
     background(220);
-    image(imgs[0], 0, 0, 64, 64);
-
+    tiles.drawTiles();
     player.Draw(xShift, yShift, tileSize);
-
-    player.Draw(xShift, yShift);
     textbox.Draw();
 }
