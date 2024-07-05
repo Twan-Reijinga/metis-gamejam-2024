@@ -21,11 +21,11 @@ class Tiles {
     
     tileToWorldCoords(x, y) {
         let worldCoords = createVector(0, 0);
-        worldCoords.y = (y / 4) * this.tileSize;
+        worldCoords.y = (y / 4 - 0.5) * this.tileSize;
         if(y % 2) {
             worldCoords.x = x * this.tileSize;
         } else {
-            worldCoords.x = (x + 0.5) * this.tileSize;
+            worldCoords.x = (x - 0.5) * this.tileSize;
         }
         return worldCoords;
     }

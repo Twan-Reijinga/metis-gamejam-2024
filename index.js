@@ -17,7 +17,7 @@ let controls = new Controls();
 let textbox = new TextBoxHandler(xResulution, yResulution);
 
 function setup() {
-    tiles = new Tiles(5, 6, 64, imgs);
+    tiles = new Tiles(5, 6, tileSize, imgs);
     player = new Player(0,0);
     createCanvas(xResulution, yResulution);
 
@@ -102,6 +102,7 @@ function draw() {
     checkControls(delta);
 
     // Drawing
+    noSmooth();
     background(220);
     tiles.drawTiles()
     player.Draw(xShift, yShift, tileSize);
