@@ -45,7 +45,6 @@ function setup() {
     textbox = new TextBoxHandler(xResulution, yResulution, null);
     createNewPlayer();
     createCanvas(xResulution, yResulution);
-    frameRate(60);
 
     tiles.tileMapings(mapTemplate.mappings);
     tiles.buildTileMap(mapTemplate.levels[level].layers);
@@ -66,22 +65,23 @@ function draw() {
     }
     textbox.Update();
 
-    button1.CheckForPlayer(player, controlHandler);
-    lever1.CheckForPlayer(player, controlHandler);
+    button1.CheckForPlayer();
+    lever1.CheckForPlayer();
     timedButton1.Update(delta);
-    timedButton1.CheckForPlayer(player, controlHandler);
+    timedButton1.CheckForPlayer();
 
     // Drawing
     noSmooth();
     background(84, 78, 104);
     tiles.drawTiles();
+    timeMashine.Draw();
+
     for (let i = 0; i < Player.players.length; i++) {
         Player.players[i].Draw(xShift, yShift, tileSize);
     }
     button1.Draw();
     lever1.Draw();
     timedButton1.Draw();
-    timeMashine.Draw();
     // rect(100, 100, 50, 50);
     // UI DRAWING  ON TOP OF ALL
     textbox.Draw();
@@ -93,15 +93,15 @@ function createNewPlayer() {
     controlHandlers.push(new ControlHandler(true, controlHandlers.length));
     Player.players.push(
         new Player(
-            11,
-            11,
+            2,
+            2,
             0,
             playerSprite,
             playerghostSprite,
             tileSize,
             tileSize,
             controlHandlers[controlHandlers.length - 1],
-            createVector(11, 11, 0)
+            createVector(2, 2, 0)
         )
     );
     textbox.controlHandler = controlHandlers[controlHandlers.length - 1];

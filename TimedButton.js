@@ -2,6 +2,7 @@ class TimedButton {
     constructor(x, y, sprite, maxTimer) {
         this.x = x;
         this.y = y;
+        this.position = createVector(x, y, 0);
         this.pressed = false;
         this.depressedSprite = sprite[0];
         this.pressedSprite = sprite[1];
@@ -17,11 +18,11 @@ class TimedButton {
         } else {
             sprite = this.depressedSprite;
         }
-        image(sprite, screenCoords.x, screenCoords.y , tileSize, tileSize);
+        image(sprite, screenCoords.x, screenCoords.y, tileSize, tileSize);
     }
-    Update(delta){
+    Update(delta) {
         if (this.pressed) {
-            if(this.maxTimer < this.timer) {
+            if (this.maxTimer < this.timer) {
                 this.pressed = false;
                 this.timer = 0;
             } else {
@@ -29,9 +30,13 @@ class TimedButton {
             }
         }
     }
-    CheckForPlayer(player, input){
-        if (this.x == player.tilePosition.x && this.y == player.tilePosition.y) {
-            if (input.INTERACT.down) {
+    CheckForPlayer() {
+        for (let i = 0; i < Player.players.length; i++) {
+            let p = Player.players[i];
+            if (
+                this.position.equals(p.tilePosition) &&
+                p.controls.INTERACT.down
+            ) {
                 this.pressed = true;
             }
         }
