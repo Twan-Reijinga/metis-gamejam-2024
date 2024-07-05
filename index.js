@@ -31,6 +31,8 @@ function setup() {
         controlHandler
     );
     createCanvas(xResulution, yResulution);
+
+    tiles.buildTileMap();
 }
 
 function draw() {
