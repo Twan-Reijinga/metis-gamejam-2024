@@ -2,12 +2,13 @@ let imgs = []
 
 let tiles;
 let player;
+
+let xResulution = 6 * 170;
+let yResulution = (xResulution / 6) * 5;
 let xShift = xResulution/2;
 let yShift = yResulution/2;
 let delta;
 let tileSize = 64;
-var xResulution = 6 * 170;
-var yResulution = (xResulution / 6) * 5;
 
 function preload() {
     imgs.push(loadImage("/Assets/Textures/placeholder.png"));
