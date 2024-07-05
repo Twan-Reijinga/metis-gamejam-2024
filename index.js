@@ -1,6 +1,7 @@
 let controlHandler = new ControlHandler();
 let imgs = [];
 let interactablesImg = [];
+let playerSprite;
 
 let tiles;
 let player;
@@ -18,6 +19,8 @@ function preload() {
     interactablesImg.push(loadImage('/Assets/Interact/Button/ButtonPressed.png'));
     interactablesImg.push(loadImage('/Assets/Interact/Button/ButtonAltDepressed.png'));
     interactablesImg.push(loadImage('/Assets/Interact/Button/ButtonAltPressed.png'));
+
+    playerSprite = loadImage("/Assets/playerCharacter.png");
 }
 
 let textbox = new TextBoxHandler(xResulution, yResulution, controlHandler);
@@ -30,12 +33,14 @@ function setup() {
     player = new Player(
         11,
         11,
-        0,
-        tileSize / 2,
-        (tileSize / 4) * 3,
+        1,
+        playerSprite,
+        tileSize,
+        tileSize,
         controlHandler
     );
     createCanvas(xResulution, yResulution);
+    frameRate(60);
 
     tiles.buildTileMap();
 
