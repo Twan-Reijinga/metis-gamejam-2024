@@ -9,9 +9,11 @@ class Tiles {
 
     buildTileMap() {
         for(let i = 0; i < this.height; i++) {
+            this.tileMap.push([]);
             for(let j = 0; j < this.width; j++) {
                 let worldCoords = Tiles.coordsToScreenPos(j, i, this.tileSize);
-                new Tile(worldCoords.x, worldCoords.y, this.tileSize, this.tileImgs[0]);
+                let newTile = new Tile(worldCoords.x, worldCoords.y, this.tileSize, this.tileImgs[0]);
+                this.tileMap[i].push(newTile);
             }
         }
     }
@@ -19,8 +21,9 @@ class Tiles {
     drawTiles() {
         for(let i = 0; i < this.height; i++) {
             for(let j = 0; j < this.width; j++) {
-                let worldCoords = Tiles.coordsToScreenPos(j, i, this.tileSize);
-                this.drawTile(worldCoords.x, worldCoords.y);
+                // let worldCoords = Tiles.coordsToScreenPos(j, i, this.tileSize);
+                // this.drawTile(worldCoords.x, worldCoords.y);
+                this.tileMap[i][j].draw();
             }
         }
     }

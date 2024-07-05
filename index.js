@@ -21,6 +21,8 @@ function setup() {
     tiles = new Tiles(12, 12, tileSize, imgs);
     player = new Player(0,0);
     createCanvas(xResulution, yResulution);
+
+    tiles.buildTileMap();
 }
 
 function draw() {

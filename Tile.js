@@ -7,6 +7,6 @@ class Tile {
     }
     
     draw() {
-        Image(this.spriteImg, x, y, this.tileSize, this.tileSize);
+        image(this.spriteImg, this.x, this.y, this.tileSize, this.tileSize);
     }
 }
