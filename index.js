@@ -17,7 +17,7 @@ let controls = new Controls();
 let textbox = new TextBoxHandler(xResulution, yResulution);
 
 function setup() {
-    tiles = new Tiles(5,5, 64, imgs);
+    tiles = new Tiles(5, 6, 64, imgs);
     player = new Player(0,0);
     createCanvas(xResulution, yResulution);
 
@@ -104,7 +104,6 @@ function draw() {
     // Drawing
     background(220);
     tiles.drawTiles()
-    image(imgs[0], 0, 0, 64, 64);
     player.Draw(xShift, yShift, tileSize);
     textbox.Draw();
 }

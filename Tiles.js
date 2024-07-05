@@ -7,12 +7,12 @@ class Tiles {
     }
 
     drawTiles() {
-        for(let i = 0; i < this.width; i++) {
+        for(let i = 0; i < this.height; i++) {
             for(let j = 0; j < this.width; j++) {
-                if(j % 2 == 0) {
-                    this.drawTile(i * this.tileSize, (j / 4) * this.tileSize);
+                if(i % 2 == 0) {
+                    this.drawTile(j * this.tileSize, (i / 4) * this.tileSize);
                 } else {
-                    this.drawTile((i + 0.5) * this.tileSize, (j / 4) * this.tileSize);
+                    this.drawTile((j + 0.5) * this.tileSize, (i / 4) * this.tileSize);
                 }
             }
         }
