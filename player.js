@@ -1,31 +1,80 @@
 class Player {
-    constructor(x, y, z, playersprite, width, height, controlHandler) {
+    static activePlayer;
+
+    static players = [];
+
+    constructor(
+        x,
+        y,
+        z,
+        playersprite,
+        playerspriteReplay,
+        width,
+        height,
+        controlHandler,
+        replayPosition
+    ) {
+        this.startPosition = createVector(x, y, z);
         this.tilePosition = createVector(x, y, z);
         this.sprite = playersprite;
+        this.othersprite = playerspriteReplay;
         this.width = width;
         this.height = height;
-        this.controlHandler = controlHandler;
+        this.controls = controlHandler;
         this.isflipped = false;
+        this.replayPosition = replayPosition;
+
+        this.timeToWait = 0;
+        this.hasMoved = false;
     }
 
     Update() {
-        if (this.controlHandler.UP.pressed) {
-            this.tilePosition.x -= 1;
-            this.isflipped = false;
-        }
-        if (this.controlHandler.DOWN.pressed) {
-            this.tilePosition.x += 1;
-            this.isflipped = true;
+        if (this.timeToWait > 0) {
+            this.timeToWait -= 1;
+            console.log(this.timeToWait);
+            if (this.timeToWait <= 0) this.controls.enabled = true;
         }
 
-        if (this.controlHandler.RIGHT.pressed) {
+        this.controls.Update();
+        if (this.controls.UP.pressed) {
+            this.tilePosition.x -= 1;
+            this.isflipped = false;
+            this.hasMoved = true;
+        }
+        if (this.controls.DOWN.pressed) {
+            this.tilePosition.x += 1;
+            this.isflipped = true;
+            this.hasMoved = true;
+        }
+
+        if (this.controls.RIGHT.pressed) {
             this.tilePosition.y -= 1;
             this.isflipped = true;
+            this.hasMoved = true;
         }
-        if (this.controlHandler.LEFT.pressed) {
+        if (this.controls.LEFT.pressed) {
             this.tilePosition.y += 1;
             this.isflipped = false;
+            this.hasMoved = true;
         }
+        if (
+            this.tilePosition.x == this.replayPosition.x &&
+            this.tilePosition.y == this.replayPosition.y &&
+            this.tilePosition.z == this.replayPosition.z &&
+            !this.controls.isReplaying &&
+            this.hasMoved
+        ) {
+            startReplay();
+        }
+    }
+
+    disableInput(time = -1) {
+        this.controls.enabled = false;
+        this.timeToWait = time;
+    }
+
+    enableInput() {
+        this.controls.enabled = true;
     }
 
     Draw(xShift, yShift, tileSize) {
@@ -36,8 +85,10 @@ class Player {
         );
         push();
 
+        this.othersprite.filter(GRAY);
+
         image(
-            this.sprite,
+            this.controls.isReplaying ? this.othersprite : this.sprite,
             screenCoords.x - this.width / 2 + tileSize / 2,
             screenCoords.y -
                 this.height +
