@@ -11,6 +11,7 @@ let xShift = xResulution / 2;
 let yShift = yResulution / 2;
 let delta;
 let tileSize = 64;
+let level = 0;
 
 function preload() {
     imgs.push(loadImage("/Assets/Textures/placeholder.png"));
@@ -33,7 +34,8 @@ function setup() {
     createCanvas(xResulution, yResulution);
     frameRate(60);
 
-    tiles.buildTileMap();
+    tiles.tileMapings(mapTemplate.mappings);
+    tiles.buildTileMap(mapTemplate.levels[level].layers);
 }
 
 function draw() {

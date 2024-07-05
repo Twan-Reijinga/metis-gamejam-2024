@@ -5,15 +5,33 @@ class Tiles {
         this.tileSize = tileSize;
         this.tileImgs = tileImgs;
         this.tileMap = [];
+        this.textures = {};
     }
 
-    buildTileMap() {
-        for(let i = 0; i < this.height; i++) {
-            this.tileMap.push([]);
-            for(let j = 0; j < this.width; j++) {
-                let worldPos = Tiles.coordsToScreenPos(j, i, this.tileSize);
-                let newTile = new Tile(worldPos.x, worldPos.y, this.tileSize, this.tileImgs[0]);
-                this.tileMap[i].push(newTile);
+    tileMapings(mappings) {
+        for (const [symbol, textures] of Object.entries(mappings)) {
+            let textureList = []
+            for(let i = 0; i < textures.length; i++) {
+                textureList.push(
+                    loadImage("/Assets/Textures/" + textures[i])
+                );
+            }
+            this.textures[symbol] = textureList;
+        };
+    }
+
+    buildTileMap(layers) {
+        this.width = layers[0].length;
+        this.height = layers[0][0].length;
+        for(let layer = 0; layer < layers.length - 1; layer++) {
+            for(let i = 0; i < this.width; i++) {
+                this.tileMap.push([]);
+                for(let j = 0; j < height; j++) {
+                    let img = Tiles.getImg(this.textures, layers[layer][i][j]);
+                    let worldPos = Tiles.coordsToScreenPos(j, i, this.tileSize);
+                    let newTile = new Tile(worldPos.x, worldPos.y, this.tileSize, img);
+                    this.tileMap[i].push(newTile);
+                }
             }
         }
     }
@@ -33,6 +51,18 @@ class Tiles {
         worldCoords.x = (x - y - 1) * 0.5 * tileSize + 0.5 * xResulution;
         worldCoords.y = (x + y) * 0.25 * tileSize;
         return worldCoords;
+    }
+
+    static getImg(textures, symbol) {
+        if(textures[symbol] == undefined) {
+            return textures['u'][0];
+        }
+        if(symbol == 's') {
+            let r = Math.floor(Math.random() * textures['s'].length);
+            return textures[symbol][r];
+        } else {
+            return textures[symbol][0];
+        }
     }
 
     // static screenPosToCoords(screenX, screenY, tileSize) {
