@@ -43,6 +43,8 @@ function draw() {
     player.Update();
     textbox.Update();
 
+    console.log(mapTemplate);
+
     // Drawing
     noSmooth();
     background(84, 78, 104);
