@@ -49,11 +49,11 @@ function setup() {
     tiles.tileMapings(mapTemplate.mappings);
     tiles.buildTileMap(mapTemplate.levels[level].layers);
 
-    button1 = new Button(6, 6, interactablesImg);
-    lever1 = new Lever(8, 8, interactablesImg);
-    timedButton1 = new TimedButton(4, 4, interactablesImg, 2);
+    button1 = new Button(6, 6, 1, interactablesImg);
+    lever1 = new Lever(8, 8, 1, interactablesImg);
+    timedButton1 = new TimedButton(4, 4, 1, interactablesImg, 2);
 
-    timeMashine = new TimeMashine(2, 2, timeMashineImg);
+    timeMashine = new TimeMashine(2, 2, 1, timeMashineImg);
 }
 
 function draw() {
@@ -82,6 +82,8 @@ function draw() {
     button1.Draw();
     lever1.Draw();
     timedButton1.Draw();
+
+    Renderer.DrawAllCalls();
     // rect(100, 100, 50, 50);
     // UI DRAWING  ON TOP OF ALL
     textbox.Draw();
@@ -93,15 +95,15 @@ function createNewPlayer() {
     controlHandlers.push(new ControlHandler(true, controlHandlers.length));
     Player.players.push(
         new Player(
-            2,
-            2,
-            0,
+            9,
+            9,
+            1,
             playerSprite,
             playerghostSprite,
             tileSize,
             tileSize,
             controlHandlers[controlHandlers.length - 1],
-            createVector(2, 2, 0)
+            createVector(2, 2, 1)
         )
     );
     textbox.controlHandler = controlHandlers[controlHandlers.length - 1];

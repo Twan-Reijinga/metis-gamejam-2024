@@ -46,10 +46,10 @@ class Tiles {
         }
     }
 
-    static coordsToScreenPos(x, y, tileSize) {
+    static coordsToScreenPos(x, y, tileSize, z = 0) {
         let worldCoords = createVector(0, 0);
         worldCoords.x = (x - y - 1) * 0.5 * tileSize + 0.5 * xResulution;
-        worldCoords.y = (x + y) * 0.25 * tileSize;
+        worldCoords.y = (x + y) * 0.25 * tileSize - (tileSize/2 * z);
         return worldCoords;
     }
 

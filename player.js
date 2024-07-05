@@ -87,16 +87,24 @@ class Player {
 
         this.othersprite.filter(GRAY);
 
-        image(
-            this.controls.isReplaying ? this.othersprite : this.sprite,
-            screenCoords.x - this.width / 2 + tileSize / 2,
-            screenCoords.y -
-                this.height +
-                tileSize / 2 -
-                (tileSize / 2) * this.tilePosition.z, //! last part should be removed
-            this.width,
-            this.height
+        Renderer.AddDrawCall(
+            this.sprite,
+            this.tilePosition,
+            createVector(0, 0),
+            createVector(this.width, this.height),
+            tileSize
         );
+
+        // image(
+        //     this.controls.isReplaying ? this.othersprite : this.sprite,
+        //     screenCoords.x - this.width / 2 + tileSize / 2,
+        //     screenCoords.y -
+        //         this.height +
+        //         tileSize / 2 -
+        //         (tileSize / 2) * this.tilePosition.z, //! last part should be removed
+        //     this.width,
+        //     this.height
+        // );
         pop();
     }
 }

@@ -1,8 +1,9 @@
 class Lever {
-    constructor(x, y, sprite) {
+    constructor(x, y, z, sprite) {
         this.x = x;
         this.y = y;
-        this.position = createVector(x, y, 0);
+        this.z = z;
+        this.position = createVector(x, y, z);
         this.pressed = false;
         this.depressedSprite = sprite[2];
         this.pressedSprite = sprite[3];
@@ -16,7 +17,14 @@ class Lever {
         } else {
             sprite = this.depressedSprite;
         }
-        image(sprite, screenCoords.x, screenCoords.y, tileSize, tileSize);
+
+        Renderer.AddDrawCall(
+            sprite,
+            this.position,
+            createVector(0, tileSize / 2),
+            createVector(tileSize, tileSize),
+            tileSize
+        );
     }
     CheckForPlayer() {
         for (let i = 0; i < Player.players.length; i++) {

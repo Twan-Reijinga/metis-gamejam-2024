@@ -1,8 +1,8 @@
 class TimedButton {
-    constructor(x, y, sprite, maxTimer) {
+    constructor(x, y, z, sprite, maxTimer) {
         this.x = x;
         this.y = y;
-        this.position = createVector(x, y, 0);
+        this.position = createVector(x, y, z);
         this.pressed = false;
         this.depressedSprite = sprite[0];
         this.pressedSprite = sprite[1];
@@ -18,7 +18,14 @@ class TimedButton {
         } else {
             sprite = this.depressedSprite;
         }
-        image(sprite, screenCoords.x, screenCoords.y, tileSize, tileSize);
+        Renderer.AddDrawCall(
+            sprite,
+            this.position,
+            createVector(0, tileSize / 2),
+            createVector(tileSize, tileSize),
+            tileSize
+        );
+        //image(sprite, screenCoords.x, screenCoords.y, tileSize, tileSize);
     }
     Update(delta) {
         if (this.pressed) {
