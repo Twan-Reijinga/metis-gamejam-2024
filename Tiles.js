@@ -9,13 +9,25 @@ class Tiles {
     drawTiles() {
         for(let i = 0; i < this.height; i++) {
             for(let j = 0; j < this.width; j++) {
-                if(i % 2 == 0) {
-                    this.drawTile(j * this.tileSize, (i / 4) * this.tileSize);
-                } else {
-                    this.drawTile((j + 0.5) * this.tileSize, (i / 4) * this.tileSize);
-                }
+                let worldCoords = this.tileToWorldCoords(j, i);
+                this.drawTile(worldCoords.x, worldCoords.y);
             }
         }
+    }
+
+    playerToTileCoords(x, y) {
+
+    }
+    
+    tileToWorldCoords(x, y) {
+        let worldCoords = createVector(0, 0);
+        worldCoords.y = (y / 4) * this.tileSize;
+        if(y % 2) {
+            worldCoords.x = x * this.tileSize;
+        } else {
+            worldCoords.x = (x + 0.5) * this.tileSize;
+        }
+        return worldCoords;
     }
 
     drawTile(x, y) {    
