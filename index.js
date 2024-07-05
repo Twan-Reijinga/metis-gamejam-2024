@@ -19,7 +19,14 @@ let textbox = new TextBoxHandler(xResulution, yResulution, controlHandler);
 
 function setup() {
     tiles = new Tiles(12, 12, tileSize, imgs);
-    player = new Player(100, 100, 0, tileSize / 2, tileSize);
+    player = new Player(
+        11,
+        11,
+        1,
+        tileSize / 2,
+        (tileSize / 4) * 3,
+        controlHandler
+    );
     createCanvas(xResulution, yResulution);
 }
 
@@ -27,13 +34,15 @@ function draw() {
     // Update
     delta = deltaTime * 0.001;
     controlHandler.Update();
+
+    player.Update();
     textbox.Update();
 
     // Drawing
     noSmooth();
     background(84, 78, 104);
     tiles.drawTiles();
-    player.Draw(0, 0, tileSize);
+    player.Draw(xShift, yShift, tileSize);
     // rect(100, 100, 50, 50);
 
     // UI DRAWING  ON TOP OF ALL
