@@ -14,7 +14,6 @@ function preload() {
     imgs.push(loadImage("/Assets/Textures/placeholder.png"));
 }
 
-let controls = new Controls();
 let textbox = new TextBoxHandler(xResulution, yResulution, controlHandler);
 
 function setup() {
