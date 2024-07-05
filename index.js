@@ -3,12 +3,13 @@ let imgs = [];
 
 let tiles;
 let player;
+
+let xResulution = 6 * 170;
+let yResulution = (xResulution / 6) * 5;
 let xShift = xResulution / 2;
 let yShift = yResulution / 2;
 let delta;
 let tileSize = 64;
-var xResulution = 6 * 170;
-var yResulution = (xResulution / 6) * 5;
 
 function preload() {
     imgs.push(loadImage("/Assets/Textures/placeholder.png"));
@@ -17,7 +18,7 @@ function preload() {
 let textbox = new TextBoxHandler(xResulution, yResulution, controlHandler);
 
 function setup() {
-    tiles = new Tiles(5, 6, tileSize, imgs);
+    tiles = new Tiles(12, 12, tileSize, imgs);
     player = new Player(100, 100, 0, tileSize / 2, tileSize);
     createCanvas(xResulution, yResulution);
 }
@@ -30,7 +31,7 @@ function draw() {
 
     // Drawing
     noSmooth();
-    background(220);
+    background(84, 78, 104);
     tiles.drawTiles();
     player.Draw(0, 0, tileSize);
     // rect(100, 100, 50, 50);
