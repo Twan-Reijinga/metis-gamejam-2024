@@ -1,5 +1,7 @@
 class TextBoxHandler {
-    constructor(screenWidth, screenHeight) {
+    constructor(screenWidth, screenHeight, controlHandler) {
+        this.controlHandler = controlHandler;
+
         this.currentMessage = "";
         this.startTime = 0;
         this.enabled = false;
@@ -27,6 +29,12 @@ class TextBoxHandler {
         this.startTime = Date.now();
         this.enabled = true;
         this.typing = true;
+    }
+
+    Update() {
+        if (this.controlHandler.INTERACT.pressed) {
+            this.OnContinuePressed();
+        }
     }
 
     OnContinuePressed() {
