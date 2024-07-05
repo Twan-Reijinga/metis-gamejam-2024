@@ -15,18 +15,10 @@ class Tiles {
         }
     }
 
-    playerToTileCoords(x, y) {
-
-    }
-    
     tileToWorldCoords(x, y) {
         let worldCoords = createVector(0, 0);
-        worldCoords.y = (y / 4 - 0.5) * this.tileSize;
-        if(y % 2) {
-            worldCoords.x = x * this.tileSize;
-        } else {
-            worldCoords.x = (x - 0.5) * this.tileSize;
-        }
+        worldCoords.x = (x - y - 1) * 0.5 * this.tileSize + 0.5 * xResulution;
+        worldCoords.y = (x + y) * 0.25 * this.tileSize;
         return worldCoords;
     }
 
