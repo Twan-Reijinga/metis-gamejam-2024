@@ -18,7 +18,7 @@ let textbox = new TextBoxHandler(xResulution, yResulution, controlHandler);
 
 function setup() {
     tiles = new Tiles(5, 6, tileSize, imgs);
-    player = new Player(0, 0);
+    player = new Player(100, 100, 0, tileSize / 2, tileSize);
     createCanvas(xResulution, yResulution);
 }
 
@@ -32,6 +32,9 @@ function draw() {
     noSmooth();
     background(220);
     tiles.drawTiles();
-    player.Draw(xShift, yShift, tileSize);
+    player.Draw(0, 0, tileSize);
+    // rect(100, 100, 50, 50);
+
+    // UI DRAWING  ON TOP OF ALL
     textbox.Draw();
 }
