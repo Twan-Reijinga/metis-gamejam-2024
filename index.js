@@ -31,6 +31,7 @@ function setup() {
         controlHandler
     );
     createCanvas(xResulution, yResulution);
+    frameRate(60);
 
     tiles.buildTileMap();
 }
@@ -42,8 +43,6 @@ function draw() {
 
     player.Update();
     textbox.Update();
-
-    console.log(mapTemplate);
 
     // Drawing
     noSmooth();
