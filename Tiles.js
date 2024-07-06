@@ -29,7 +29,7 @@ class Tiles {
                 for(let j = 0; j < height; j++) {
                     let img = Tiles.getImg(this.textures, layers[layer][i][j]);
                     let worldPos = Tiles.coordsToScreenPos(j, i, this.tileSize);
-                    let newTile = new Tile(worldPos.x, worldPos.y, this.tileSize, img);
+                    let newTile = new Tile(worldPos.x, worldPos.y, this.tileSize, img, createVector(j, i, layer));
                     this.tileMap[i].push(newTile);
                 }
             }

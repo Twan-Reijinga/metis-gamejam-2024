@@ -34,12 +34,9 @@ class ControlHandler {
                 if (this.recordingHeldInputs.includes(code)) {
                     let index = this.recordingHeldInputs.indexOf(code);
                     this.recordingHeldInputs.splice(index, 1);
-                    console.log(code + " released at " + this.time);
                     continue;
                 } else {
                     this.recordingHeldInputs.push(code);
-                    console.log(code + " pressed at " + this.time);
-                    console.log(this.recordingHeldInputs);
                 }
             }
         }
@@ -53,7 +50,6 @@ class ControlHandler {
                 let code = keybind.keycodes[j];
                 if (this.checkKey(code)) {
                     down = true;
-                    //console.log(this.recording);
                 }
             }
 
@@ -101,7 +97,6 @@ class ControlHandler {
         this.isReplaying = true;
         this.time = 0;
         this.recordingHeldInputs = [];
-        console.log(this.recordedInputs);
     }
 }
 

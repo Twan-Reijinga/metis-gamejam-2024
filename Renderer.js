@@ -35,7 +35,7 @@ class DrawCall {
         let x = this.worldposition.x;
         let y = this.worldposition.y;
         let z = this.worldposition.z;
-        this.distanceToCamera = x + y - z;
+        this.distanceToCamera = x + y + z;
     }
 
     Execute() {
